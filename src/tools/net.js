@@ -5,7 +5,7 @@ axios.defaults.timeout = env.VITE_API_TIMEOUT
 axios.defaults.headers.post['Content-Type'] = 'application/json;charset=UTF-8'
 // 添加请求拦截器
 axios.interceptors.request.use(config => {
-    console.log(config);
+    // console.log(config);
     return config
 }, err => {
     return Promise.reject(err)
@@ -14,7 +14,7 @@ axios.interceptors.request.use(config => {
 
 // 添加响应拦截器
 axios.interceptors.response.use(res => {
-    console.log(res);
+    // console.log(res);
     return res;
 }, err => {
     return Promise.reject(err)
