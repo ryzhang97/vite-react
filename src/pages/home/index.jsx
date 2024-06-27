@@ -1,15 +1,18 @@
 import React from 'react';
-import {post} from '../../tools/net'
+import withNavigate from '@/containers/withNavigate';
+import {post} from '@/tools/api'
 
 class Page extends React.Component {
     state = {
         message: 'home', custom: '', test: '',
-    };
+    }
 
     //挂载前
     constructor(props) {
         super(props);
         console.log("挂载前")
+        console.log(props)
+
     }
 
     async getData() {
@@ -41,6 +44,9 @@ class Page extends React.Component {
     componentDidUpdate(prevProps, prevState) {
         console.log("组件重新渲染后")
     }
+    handleClick = () => {
+        this.props.navigate('/login');
+    }
 
     //组件即将移除
     componentWillUnmount() {
@@ -53,9 +59,10 @@ class Page extends React.Component {
             <div>{this.state.message}</div>
             <div>{this.state.test}</div>
             <div>{this.state.custom}</div>
+            <button onClick={this.handleClick}>login</button>
         </div>
     }
 
 }
 
-export default Page
+export default withNavigate(Page)
