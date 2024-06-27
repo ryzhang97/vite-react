@@ -1,9 +1,16 @@
 import {defineConfig} from 'vite'
+import path from 'path';
 
 const env = import.meta.env
 import react from '@vitejs/plugin-react'
 
 export default defineConfig({
+    resolve:{
+        alias: {
+            // 添加别名
+            '@': path.resolve(__dirname, './src'),
+        }
+    },
     plugins: [react({
         babel: {
             plugins: ['@babel/plugin-transform-react-jsx'],
