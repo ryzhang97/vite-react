@@ -3,7 +3,7 @@ import {post} from '../../tools/net'
 
 class Page extends React.Component {
     state = {
-        message: 'home',
+        message: 'home', custom: '', test: '',
     };
 
     //挂载前
@@ -12,12 +12,21 @@ class Page extends React.Component {
         console.log("挂载前")
     }
 
+    async getData() {
+        let custom = post('/custom')
+        let test = post('/test')
+        custom = await custom
+        test = await test
+        return {custom: custom, test}
+    }
+
     //挂载后
     componentDidMount() {
         console.log("挂载后")
-        post('/custom').then(res => {
-            console.log(res.data.message)
-            this.state.message = res.data.message
+        this.getData().then(res => {
+            console.log(res)
+            this.state.custom = res.custom.data
+            this.state.test = res.test.data
             this.setState(this.state)
         })
     }
@@ -40,7 +49,11 @@ class Page extends React.Component {
 
 
     render() {
-        return <div>{this.state.message}</div>
+        return <div>
+            <div>{this.state.message}</div>
+            <div>{this.state.test}</div>
+            <div>{this.state.custom}</div>
+        </div>
     }
 
 }
